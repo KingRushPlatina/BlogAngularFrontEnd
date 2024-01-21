@@ -1,0 +1,27 @@
+<!-- posts-list.component.html -->
+<div class="container my-5">
+  <h1 class="mb-4">Posts</h1>
+
+  <div *ngIf="posts && posts.length > 0" class="row">
+    <div *ngFor="let post of posts" class="col-md-3 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.body | slice:0:150 }}{{ post.body.length > 150 ? '...' : '' }}</p>
+          <p class="card-text"><small class="text-muted">Postato il -- {{ post.publishDate | date:'medium' }}</small></p>
+          <button class="btn btn-primary btn-circle float-end" (click)="goToPostDetail(post.id)">
+            <i class="fa fa-info"></i>
+          </button>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+  <p *ngIf="!posts || posts.length === 0">No Posts Found</p>
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button class="btn btn-primary" [disabled]="pageNumber === 1" (click)="goToPreviousPage()">Previous</button>
+    <span class="mx-2">Page {{ pageNumber }}</span>
+    <button class="btn btn-primary" [disabled]="!hasNextPage" (click)="goToNextPage()">Next</button>
+  </div>
+</div>

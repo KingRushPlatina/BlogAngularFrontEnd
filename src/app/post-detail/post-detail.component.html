@@ -1,0 +1,19 @@
+<!-- posts-create.component.html -->
+
+<div class="container my-5">
+    <h1 class="mb-3">Create a New Post</h1>
+    
+    <form #form="ngForm" (ngSubmit)="addPost()"> 
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="addPostRequest.title" name="title"  required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea class="form-control" id="body" [(ngModel)]="addPostRequest.body" name="body"  required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Publish</button>
+    </form>
+</div>

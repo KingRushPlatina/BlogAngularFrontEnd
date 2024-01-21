@@ -1,0 +1,27 @@
+<div class="container my-5">
+    <div *ngIf="post" class="card">
+      <div class="card-body">
+        <h1 class="card-title">{{ post.title }}</h1>
+        <p class="card-text">{{ post.body }}</p>
+        <p class="card-text"><small class="text-muted">Pubblicato il {{ post.publishDate | date:'medium' }}</small></p>
+  
+        <div class="mt-4">
+          <h3>Autore:</h3>
+          <p>{{ post.autor?.mail }}</p>
+        </div>
+  
+        <div *ngIf="post.comments && post.comments.length > 0" class="mt-4">
+          <h3>Commenti:</h3>
+          <ul class="list-group">
+            <li *ngFor="let comment of post.comments" class="list-group-item">
+              <p>{{ comment.text }}</p>
+              <p class="card-text"><small class="text-muted">Commentato il {{ comment.creationDate | date:'medium' }}</small></p>
+            </li>
+          </ul>
+        </div>
+  
+        <button class="btn btn-primary mt-3" (click)="goBack()">Torna ai Post</button>
+      </div>
+    </div>
+  </div>
+  
