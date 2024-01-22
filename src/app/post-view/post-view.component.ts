@@ -8,8 +8,9 @@ import { PostsService } from '../services/posts.service';
   templateUrl: './post-view.component.html',
   styleUrls: ['./post-view.component.css'],
 })
+
 export class PostViewComponent implements OnInit {
-  postId: number =0;
+  postId: number = 0;
   post: Post | undefined;
 
   constructor(
@@ -28,7 +29,7 @@ export class PostViewComponent implements OnInit {
   getPostDetails() {
     this.postsService.getPostDetails(this.postId).subscribe(
       (data: Post) => {
-        console.log(data)
+        console.log(data);
         this.post = data;
       },
       (error) => {

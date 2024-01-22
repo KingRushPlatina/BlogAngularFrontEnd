@@ -1,7 +1,6 @@
 export interface Autor {
-    id: number;
-    name: string;
-    surname: string;
-    mail: string;
-  }
-  
+  id: number;
+  name: string;
+  surname: string;
+  mail: string;
+}

@@ -5,20 +5,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   isNavbarCollapsed = true;
   title: string = '';
   pageNumber: number = 1;
 
-  constructor(private postsService: PostsService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private postsService: PostsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const pageParam = params.get('page');
       this.pageNumber = pageParam ? +pageParam : 1;
-      console.log(pageParam)
+      console.log(pageParam);
     });
   }
 

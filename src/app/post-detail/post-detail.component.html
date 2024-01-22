@@ -1,13 +1,11 @@
 <body>
   <div class="container my-5">
     <h1 class="mb-3">Crea un nuovo post</h1>
-
     <form #form="ngForm" (ngSubmit)="addPost()">
       <div class="mb-3">
         <label for="title" class="form-label">Titolo</label>
         <input type="text" class="form-control" id="title" [(ngModel)]="addPostRequest.title" name="title" required>
       </div>
-
       <div class="mb-3">
         <label for="body" class="form-label">Contenuto</label>
         <textarea class="form-control" id="body" [(ngModel)]="addPostRequest.body" name="body" required></textarea>

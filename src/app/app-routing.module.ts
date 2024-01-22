@@ -7,21 +7,21 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '', 
+    path: '',
     redirectTo: 'posts/page/1', // Aggiungi questa riga per il redirect
-    pathMatch: 'full' 
+    pathMatch: 'full',
   },
   {
-    path:'posts/page/:page',
-    component: PostsListComponent
+    path: 'posts/page/:page',
+    component: PostsListComponent,
   },
   {
-    path:'post/add',
-    component: PostDetailComponent
+    path: 'post/add',
+    component: PostDetailComponent,
   },
-  { 
-    path: 'post/:id', 
-    component: PostDetailComponent
+  {
+    path: 'post/:id',
+    component: PostDetailComponent,
   },
   {
     path: 'post-view/:id',
@@ -29,13 +29,12 @@ const routes: Routes = [
   },
   {
     path: 'posts/title/:title/page/:page',
-    component:PostsListComponent
-  }
-
+    component: PostsListComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

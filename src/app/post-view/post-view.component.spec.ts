@@ -8,10 +8,9 @@ describe('PostViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PostViewComponent]
-    })
-    .compileComponents();
-    
+      declarations: [PostViewComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PostViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
