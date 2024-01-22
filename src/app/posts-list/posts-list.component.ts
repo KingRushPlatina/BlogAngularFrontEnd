@@ -28,7 +28,7 @@ export class PostsListComponent implements OnInit {
       setTimeout(() => {
         this.successMessage = '';
         this.postsService.setSuccessMessage(''); 
-      }, 10000);
+      }, 1000000);
     });
   }
 

@@ -26,7 +26,13 @@ export class PostDetailComponent implements OnInit {
       {
         id: 1,
         text: "Testo del commento",
-        creationDate: new Date().toISOString()
+        creationDate: new Date().toISOString(),
+        commentator: {
+          id: 0,
+          name: "Nome dell'autore",
+          surname: "Cognome dell'autore",
+          mail: "mail@example.com"
+        }
       }
     ]
   };
