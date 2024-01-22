@@ -1,4 +1,3 @@
-// posts-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from '../services/posts.service';
@@ -13,6 +12,7 @@ export class PostsListComponent implements OnInit {
   hasNextPage: boolean = false;
   posts: Post[] = [];
   pageNumber: number = 1;
+  successMessage: string = ''; // New variable for success message
 
   constructor(private postsService: PostsService, private route: ActivatedRoute, private router: Router) {}
 
@@ -21,14 +21,22 @@ export class PostsListComponent implements OnInit {
       this.pageNumber = +params['page'] || 1;
       this.loadPosts();
     });
+
+    this.postsService.getSuccessMessage().subscribe((message) => {
+      this.successMessage = message;
+
+      setTimeout(() => {
+        this.successMessage = '';
+        this.postsService.setSuccessMessage(''); 
+      }, 10000);
+    });
   }
 
   loadPosts(): void {
     this.postsService.getPaginatedPosts(this.pageNumber, 4).subscribe({
       next: (response) => {
         this.posts = response;
-        this.hasNextPage = response.length === 4; // Se la lunghezza della lista è uguale alla dimensione della pagina, ci sono più post disponibili
-
+        this.hasNextPage = response.length === 4;
       },
       error: (error) => {
         console.log(error);
@@ -53,9 +61,7 @@ export class PostsListComponent implements OnInit {
     this.loadPosts();
   }
 
-  
   goToPostDetail(postId: number): void {
     this.router.navigate(['/post-view', postId]);
   }
-
 }

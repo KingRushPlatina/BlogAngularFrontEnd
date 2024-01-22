@@ -13,4 +13,12 @@ describe('PostsService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  
 });
+setSuccessMessage(message: string): void {
+  this.successMessageSubject.next(message);
+}
+
+getSuccessMessage(): Observable<string> {
+  return this.successMessageSubject.asObservable();
+}

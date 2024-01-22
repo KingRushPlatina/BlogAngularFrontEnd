@@ -15,7 +15,7 @@
           <ul class="list-group">
             <li *ngFor="let comment of post.comments" class="list-group-item">
               <p>{{ comment.text }}</p>
-              <p class="card-text"><small class="text-muted">Commentato il {{ comment.creationDate | date:'medium' }}</small></p>
+              <p class="card-text"><small class="text-muted">Commentato il {{ comment.creationDate }}</small></p>
             </li>
           </ul>
         </div>

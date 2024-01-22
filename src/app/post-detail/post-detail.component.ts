@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 import { Post } from '../models/post.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-detail',
@@ -10,16 +11,27 @@ import { Post } from '../models/post.model';
 })
 export class PostDetailComponent implements OnInit {
 
-  addPostRequest: Post = {
+   addPostRequest: Post = {
     id: 0,
-    title: '',
-    body: '',
-    publishDate: new Date(),
-    autor: null,
-    comments: null
+    title: "",
+    body: "",
+    publishDate: new Date().toISOString(),
+    autor: {
+      id: 1,
+      name: "Nome dell'autore",
+      surname: "Cognome dell'autore",
+      mail: "mail@example.com"
+    },
+    comments: [
+      {
+        id: 1,
+        text: "Testo del commento",
+        creationDate: new Date().toISOString()
+      }
+    ]
   };
-
-  constructor(private postsService: PostsService) {}
+  route: any;
+  constructor(private postsService: PostsService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -27,12 +39,15 @@ export class PostDetailComponent implements OnInit {
     this.postsService.addPost(this.addPostRequest).subscribe(
       (response) => {
         console.log('Post added successfully:', response);
-        // Puoi eseguire altre azioni dopo aver aggiunto il post
+        this.postsService.setSuccessMessage('Post aggiunto con successo!');
+        this.router.navigate(['']);
       },
       (error) => {
         console.error('Error adding post:', error);
-        // Gestisci gli errori qui
       }
     );
+  }
+  goBack(): void {
+    this.router.navigate(['']);
   }
 }
