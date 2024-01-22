@@ -12,6 +12,7 @@ export class PostsListComponent implements OnInit {
   hasNextPage: boolean = false;
   posts: Post[] = [];
   pageNumber: number = 1;
+  title:string='';
   successMessage: string = ''; // New variable for success message
 
   constructor(private postsService: PostsService, private route: ActivatedRoute, private router: Router) {}
@@ -19,6 +20,7 @@ export class PostsListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.pageNumber = +params['page'] || 1;
+      this.title= params['title'] || '';
       this.loadPosts();
     });
 
@@ -33,7 +35,7 @@ export class PostsListComponent implements OnInit {
   }
 
   loadPosts(): void {
-    this.postsService.getPaginatedPosts(this.pageNumber, 4).subscribe({
+    this.postsService.getPaginatedPosts(this.title,this.pageNumber, 4).subscribe({
       next: (response) => {
         this.posts = response;
         this.hasNextPage = response.length === 4;
@@ -57,7 +59,8 @@ export class PostsListComponent implements OnInit {
   }
 
   updateUrlAndLoadPosts(): void {
-    this.router.navigate(['posts', 'page', this.pageNumber]);
+    const url = `posts/title/${this.title}/page/${this.pageNumber}`;
+    this.router.navigate([url]);
     this.loadPosts();
   }
 

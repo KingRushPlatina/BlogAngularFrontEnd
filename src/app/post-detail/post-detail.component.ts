@@ -28,7 +28,7 @@ export class PostDetailComponent implements OnInit {
         text: "Testo del commento",
         creationDate: new Date().toISOString(),
         commentator: {
-          id: 0,
+          id: 1,
           name: "Nome dell'autore",
           surname: "Cognome dell'autore",
           mail: "mail@example.com"
@@ -47,6 +47,7 @@ export class PostDetailComponent implements OnInit {
         console.log('Post added successfully:', response);
         this.postsService.setSuccessMessage('Post aggiunto con successo!');
         this.router.navigate(['']);
+      
       },
       (error) => {
         console.error('Error adding post:', error);

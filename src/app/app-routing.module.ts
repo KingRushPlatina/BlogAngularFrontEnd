@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostViewComponent } from './post-view/post-view.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component: PostsListComponent
+    path: '', 
+    redirectTo: 'posts/page/1', // Aggiungi questa riga per il redirect
+    pathMatch: 'full' 
   },
   {
     path:'posts/page/:page',
@@ -25,6 +27,10 @@ const routes: Routes = [
     path: 'post-view/:id',
     component: PostViewComponent,
   },
+  {
+    path: 'posts/title/:title/page/:page',
+    component:PostsListComponent
+  }
 
 ];
 

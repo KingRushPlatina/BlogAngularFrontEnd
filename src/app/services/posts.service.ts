@@ -14,8 +14,8 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  getPaginatedPosts(pageNumber: number, pageSize: number): Observable<Post[]> {
-    const params = new HttpParams().set('pageNumber', pageNumber.toString()).set('pageSize', pageSize.toString());
+  getPaginatedPosts(title:string,pageNumber: number, pageSize: number): Observable<Post[]> {
+    const params = new HttpParams().set('title', title.toString()).set('pageNumber', pageNumber.toString()).set('pageSize', pageSize.toString());
     return this.http.get<Post[]>(`${this.baseUrl}Posts`, { params });
   }
 
