@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../services/posts.service';
 import { Post } from '../models/post.model';
 import { Router } from '@angular/router';
@@ -8,65 +9,45 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.css'],
-  
 })
 export class PostDetailComponent implements OnInit {
-  addPostRequest: Post = {
-    id: 0,
-    title: '',
-    body: '',
-    publishDate: new Date().toISOString(),
-    autor: {
-      id: 1,
-      name: "Nome dell'autore",
-      surname: "Cognome dell'autore",
-      mail: 'mail@example.com',
-    },
-    comments: [
-      {
-        id: 1,
-        text: 'Testo del commento',
-        creationDate: new Date().toISOString(),
-        commentator: {
-          id: 1,
-          name: "Nome dell'autore",
-          surname: "Cognome dell'autore",
-          mail: 'mail@example.com',
-        },
-      },
-    ],
-  };
+  addPostForm: FormGroup;
+  imagePreview: any;
   @ViewChild('content') content: any;
-  @ViewChild('fileInput') fileInput: ElementRef | undefined; // Riferimento all'input file
-  imagePreview: any; // Proprietà per la preview dell'immagine
-  route: any;
-  
-  constructor(private postsService: PostsService, private router: Router,  private modalService: NgbModal ) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private postsService: PostsService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {
+    this.addPostForm = this.fb.group({
+      title: ['', Validators.required],
+      body: ['', Validators.required],
+      file: [null, Validators.required], // Aggiunto controllo required per il campo del file
+    });
+  }
 
   ngOnInit(): void {}
 
   addPost(): void {
-    // Crea un oggetto FormData e appendi i campi necessari, inclusa l'immagine
     const formData = new FormData();
-    formData.append('title', this.addPostRequest.title);
-    formData.append('body', this.addPostRequest.body);
-    formData.append('authorid', '1');
+    const fileInput = document.getElementById('file') as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      formData.append('file', file, file.name);
+      formData.append('Head', this.addPostForm.value.title);
+      formData.append('Body', this.addPostForm.value.body);
 
-    if (this.fileInput && this.fileInput.nativeElement.files.length > 0) {
-      formData.append('file', this.fileInput.nativeElement.files[0]);
+      this.postsService.uploadFile(formData).subscribe(
+        (response) => {
+          console.log('got response', response);
+          this.postsService.setSuccessMessage('Post aggiunto con successo!');
+          this.router.navigate(['']);
+        },
+        (error: any) => console.error('got error', error)
+      );
     }
-
-    // Chiama il servizio per aggiungere il post
-    this.postsService.addPoster(formData).subscribe(
-      (response) => {
-        console.log('Post added successfully:', response);
-        this.postsService.setSuccessMessage('Post aggiunto con successo!');
-        this.router.navigate(['']);
-      },
-      (error) => {
-        console.error('Error adding post:', error);
-      }
-    );
   }
 
   goBack(): void {
@@ -93,5 +74,8 @@ export class PostDetailComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+  }
+  get formControls() {
+    return this.addPostForm.controls;
   }
 }

@@ -4,11 +4,12 @@ import { PostsListComponent } from './posts-list/posts-list.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostViewComponent } from './post-view/post-view.component';
 import { AppComponent } from './app.component';
+import { UploadFormComponent } from './upload-test/upload-test.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'posts/page/1', // Aggiungi questa riga per il redirect
+    redirectTo: 'posts/page/1', 
     pathMatch: 'full',
   },
   {
@@ -27,10 +28,10 @@ const routes: Routes = [
     path: 'post-view/:id',
     component: PostViewComponent,
   },
-  {
-    path: 'posts/title/:title/page/:page',
-    component: PostsListComponent,
+  { path: 'posts/title/:title/page/:page', 
+   component: PostsListComponent 
   },
+
 ];
 
 @NgModule({

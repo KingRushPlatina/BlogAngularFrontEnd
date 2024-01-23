@@ -66,9 +66,10 @@ export class PostsListComponent implements OnInit {
 
   updateUrlAndLoadPosts(): void {
     const url = `posts/title/${this.title}/page/${this.pageNumber}`;
-    this.router.navigate([url]);
+    this.router.navigate([url]);  
     this.loadPosts();
   }
+  
 
   goToPostDetail(postId: number): void {
     this.router.navigate(['/post-view', postId]);

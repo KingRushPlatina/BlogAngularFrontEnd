@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Post } from '../models/post.model';
-import { BehaviorSubject, Observable, catchError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class PostsService {
   addPoste(formData: FormData) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'http://localhost:5108/api/Blog/';
+  private baseUrl = 'https://localhost:7238/api/Blog/';
   private successMessageSubject: BehaviorSubject<string> =
     new BehaviorSubject<string>('');
 
@@ -65,4 +65,36 @@ export class PostsService {
   addPoster(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}Post`, formData);
   }
+  
+  addUpload(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}Upload`, formData)
+      .pipe(
+        catchError(error => {
+          console.error('Upload error:', error);
+          return (error); // Puoi ritornare un valore di fallback o gestire l'errore qui
+        })
+      );
+  }
+
+  upload(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+  
+    return this.http.post(`${this.baseUrl}Upload`, formData)
+      .pipe(
+        catchError(error => {
+          console.error('Upload error:', error);
+          return of(null);
+        })
+      );
+  }
+  uploadFile(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}Upload`, formData).pipe(
+      catchError((error) => {
+        console.error('Upload error:', error);
+        return of(null);
+      })
+    );
+  }
 }
+
