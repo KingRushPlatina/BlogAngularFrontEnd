@@ -12,7 +12,10 @@ import { BehaviorSubject, Observable, catchError } from 'rxjs';
   providedIn: 'root',
 })
 export class PostsService {
-  private baseUrl = 'https://localhost:7238/api/Blog/';
+  addPoste(formData: FormData) {
+    throw new Error('Method not implemented.');
+  }
+  private baseUrl = 'http://localhost:5108/api/Blog/';
   private successMessageSubject: BehaviorSubject<string> =
     new BehaviorSubject<string>('');
 
@@ -57,5 +60,9 @@ export class PostsService {
 
   getSuccessMessage(): Observable<string> {
     return this.successMessageSubject.asObservable();
+  }
+  
+  addPoster(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}Post`, formData);
   }
 }

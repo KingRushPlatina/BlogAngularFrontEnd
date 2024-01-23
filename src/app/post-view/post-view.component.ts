@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../models/post.model';
 import { PostsService } from '../services/posts.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-post-view',
@@ -16,7 +17,9 @@ export class PostViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private postsService: PostsService
+    private postsService: PostsService,
+  
+
   ) {}
 
   ngOnInit(): void {

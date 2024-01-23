@@ -8,4 +8,5 @@ export interface Post {
   publishDate: string | null;
   autor: Autor | null;
   comments: Comment[] | null;
+  file?: File;  
 }

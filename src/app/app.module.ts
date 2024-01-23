@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { FormsModule } from '@angular/forms';
 import { PostViewComponent } from './post-view/post-view.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { PostViewComponent } from './post-view/post-view.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiUrl },
