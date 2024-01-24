@@ -4,17 +4,24 @@ import { PostsListComponent } from './posts-list/posts-list.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostViewComponent } from './post-view/post-view.component';
 import { AppComponent } from './app.component';
-import { UploadFormComponent } from './upload-test/upload-test.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'posts/page/1', 
+    redirectTo: 'posts/title/%20/page/1',
     pathMatch: 'full',
   },
   {
+ 
     path: 'posts/page/:page',
-    component: PostsListComponent,
+    redirectTo: 'posts/title/%20/page/1', 
+    pathMatch: 'full',
+  },
+  {
+ 
+    path:'posts/title//page/1', 
+    redirectTo: 'posts/title/%20/page/1', 
+    pathMatch: 'full',
   },
   {
     path: 'post/add',

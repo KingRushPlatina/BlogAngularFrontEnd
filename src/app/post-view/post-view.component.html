@@ -2,13 +2,18 @@
   <div *ngIf="post" class="card">
     <div class="card-body">
       <div class="post-content bg-light p-4 mb-4">
+
         <h1 class="card-title text-center mb-4">{{ post.title }}</h1>
-        <p class="card-text mb-4">{{ post.body }}</p>
+        <img [src]="post.imagePath" style="width: 100%; max-height: 500px; margin-bottom: -5px;"/>
+        <br>
+        <p class="card-text mb-5">{{ post.body }}</p>
+        
         <p class="card-text text-muted"><small>Pubblicato il {{ post.publishDate}}</small></p>
         <div class="mt-4">
           <p class="mb-2"><strong>Autore:</strong> {{ post.autor?.mail }}</p>
         </div>
-        <div *ngIf="post.comments && post.comments.length > 0" class="mt-5">
+     
+      <div *ngIf="post.comments && post.comments.length > 0" class="mt-5">
           <h3>Commenti:</h3>
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -29,6 +34,9 @@
             </table>
           </div>
         </div>
+        
+      
+
       </div>
       <div class="position-absolute top-0 end-0 mt-0">
         <button class="btn btn-primary" (click)="goBack()">Torna ai Post</button>
@@ -36,3 +44,4 @@
     </div>
   </div>
 </div>
+

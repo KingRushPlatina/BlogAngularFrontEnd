@@ -9,4 +9,5 @@ export interface Post {
   autor: Autor | null;
   comments: Comment[] | null;
   file?: File;  
+  imagePath:string;
 }

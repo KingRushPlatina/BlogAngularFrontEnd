@@ -15,7 +15,7 @@ export class PostsService {
   addPoste(formData: FormData) {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'https://localhost:7238/api/Blog/';
+  private baseUrl = 'http://localhost:5108/api/Blog/';
   private successMessageSubject: BehaviorSubject<string> =
     new BehaviorSubject<string>('');
 
@@ -35,20 +35,7 @@ export class PostsService {
 
   addPost(addPostRequest: Post): Observable<any> {
     console.log(addPostRequest);
-
-    return this.http.post(`${this.baseUrl}Post`, addPostRequest).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error('Error adding post:', error);
-
-        if (error.error && error.error.errors) {
-          // Accesso agli errori di convalida
-          const validationErrors = error.error.errors;
-          console.log('Validation errors:', validationErrors);
-        }
-
-        throw error; // Rilancia l'errore per poter essere gestito nell'handler del chiamante
-      })
-    );
+    return this.http.post(`${this.baseUrl}Post`, addPostRequest)  
   }
 
   getPostDetails(postId: number): Observable<Post> {
@@ -59,6 +46,7 @@ export class PostsService {
   }
 
   getSuccessMessage(): Observable<string> {
+    
     return this.successMessageSubject.asObservable();
   }
   
@@ -68,25 +56,12 @@ export class PostsService {
   
   addUpload(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}Upload`, formData)
-      .pipe(
-        catchError(error => {
-          console.error('Upload error:', error);
-          return (error); // Puoi ritornare un valore di fallback o gestire l'errore qui
-        })
-      );
   }
 
   upload(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file, file.name);
-  
     return this.http.post(`${this.baseUrl}Upload`, formData)
-      .pipe(
-        catchError(error => {
-          console.error('Upload error:', error);
-          return of(null);
-        })
-      );
   }
   uploadFile(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}Upload`, formData).pipe(
@@ -96,5 +71,8 @@ export class PostsService {
       })
     );
   }
+
+
+  
 }
 
