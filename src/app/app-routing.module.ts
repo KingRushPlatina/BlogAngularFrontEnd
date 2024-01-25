@@ -35,12 +35,11 @@ const routes: Routes = [
     path: 'post-view/:id',
     component: PostViewComponent,
   },
-  { path: 'posts/title/:title/page/:page', 
+  { 
+    path: 'posts/title/:title/page/:page', 
    component: PostsListComponent 
   },
-
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

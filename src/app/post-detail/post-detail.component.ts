@@ -30,9 +30,7 @@ export class PostDetailComponent implements OnInit {
       
     });
   }
-
   ngOnInit(): void {}
-
   addPost(): void {
     const formData = new FormData();
     const fileInput = document.getElementById('file') as HTMLInputElement;
@@ -57,25 +55,18 @@ export class PostDetailComponent implements OnInit {
       });
     }
   }
-
-
   goBack(): void {
     this.router.navigate(['']);
   }
-
   UploadImage(): void {
     this.openModal(this.content);
   }
-
   ProceedUpload(): void {}
-
   openModal(content: any): void {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
-
   handleImageChange(event: any): void {
     const file = event.target.files[0];
-
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {

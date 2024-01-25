@@ -25,7 +25,6 @@
   <div *ngIf="successMessage" class="alert alert-success" role="alert">
     {{ successMessage }}
   </div>
-  
   <div class="fixed-bottom fixed-bottom-0 bg-light p-3">
     <div class="d-flex justify-content-between align-items-center">
       <button class="btn btn-primary" [disabled]="pageNumber === 1" (click)="goToPreviousPage()">Precedente</button>
